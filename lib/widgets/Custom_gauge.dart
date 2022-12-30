@@ -68,6 +68,7 @@ class CustomGauge extends StatelessWidget {
               GaugeAnnotation(
                 widget: Column(
                   children: [
+                    SizedBox(height: 150.0),
                     Container(
                       child: Text(
                         _bmiResult.toStringAsFixed(2),
@@ -75,7 +76,7 @@ class CustomGauge extends StatelessWidget {
                             fontSize: 25, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    SizedBox(height: 200),
+                    SizedBox(height: 40.0),
                     Container(
                       child: Text(
                         _textResult,
