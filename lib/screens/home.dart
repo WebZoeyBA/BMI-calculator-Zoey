@@ -23,10 +23,23 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Calculate your BMI",
-          style:
-              TextStyle(color: Colors.grey[600], fontWeight: FontWeight.w300),
+        toolbarHeight: 80.0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.calculate,
+              size: 70.0,
+              color: Colors.grey[600],
+            ),
+            Text(
+              "ZOEY BMI Calculator",
+              style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 32,
+                  fontWeight: FontWeight.w600),
+            ),
+          ],
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,

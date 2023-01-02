@@ -13,7 +13,7 @@ class HeightContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 170,
-      height: 72,
+      height: 70,
       child: Material(
         borderRadius: BorderRadius.circular(5),
         elevation: 20,

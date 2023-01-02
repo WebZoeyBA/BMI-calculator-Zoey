@@ -19,14 +19,10 @@ class CustomGauge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
-      height: 400,
+      width: 350,
+      height: 350,
       padding: EdgeInsets.all(25.0),
       child: SfRadialGauge(
-        title: GaugeTitle(
-          text: "BMI Meter",
-          textStyle: TextStyle(color: Colors.grey[800]),
-        ),
         enableLoadingAnimation: true,
         animationDuration: 4500,
         axes: <RadialAxis>[
