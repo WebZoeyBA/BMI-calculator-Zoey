@@ -39,6 +39,7 @@ dependencies:
   hexcolor: ^3.0.1
   kdgaugeview: ^1.0.4
   syncfusion_flutter_gauges: ^20.4.38
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

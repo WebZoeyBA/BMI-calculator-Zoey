@@ -4,17 +4,32 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:bmi_calcularor_zoey/widgets/Custom_gauge.dart';
 import 'package:bmi_calcularor_zoey/widgets/height_container.dart';
 import 'package:bmi_calcularor_zoey/widgets/weight_container';
+import 'package:bmi_calcularor_zoey/models/bmi_history.dart';
+import 'package:intl/intl.dart';
+import 'package:bmi_calcularor_zoey/widgets/history_list.dart';
 
 class MyHomeScreen extends StatefulWidget {
-  const MyHomeScreen({super.key});
-
   @override
   State<MyHomeScreen> createState() => _MyHomeScreenState();
 }
 
 class _MyHomeScreenState extends State<MyHomeScreen> {
+  final List<HistoryInstance> _userHistory = [];
+
+  void addNewInstance(String usernameIns) {
+    final newIns = HistoryInstance(
+        id: DateTime.now().toString(),
+        username: usernameIns,
+        date: DateTime.now());
+    setState(() {
+      _userHistory.add(newIns);
+    });
+  }
+
   TextEditingController _heightController = TextEditingController();
   TextEditingController _weightController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+  String usernameInput = "";
   double _bmiResult = 0;
   String _textResult = "";
   Color _resColor = Color.fromARGB(235, 0, 0, 0);
@@ -49,6 +64,34 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Container(
+              width: double.infinity,
+              height: 70,
+              margin: EdgeInsets.symmetric(horizontal: 53.0, vertical: 20.0),
+              child: Material(
+                child: TextField(
+                  controller: _usernameController,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 42,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.grey[600],
+                  ),
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(5)),
+                    hintText: "Enter your name",
+                    hintStyle: TextStyle(
+                        color: Colors.grey.withOpacity(0.8),
+                        fontWeight: FontWeight.w300,
+                        fontSize: 42),
+                  ),
+                ),
+              ),
+            ),
             SizedBox(
               height: 20,
             ),
@@ -72,6 +115,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 ),
               ),
               onPressed: () {
+                addNewInstance(_usernameController.text);
                 double _h = double.parse(_heightController.text);
                 double _w = double.parse(_weightController.text);
                 setState(() {
@@ -114,12 +158,14 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 setState(() {
                   _bmiResult = 0;
                   _textResult = "";
+                  _usernameController.text = "";
                   _weightController.text = "";
                   _heightController.text = "";
                   _resColor = Colors.black;
                 });
               },
             ),
+            HistoryList(_userHistory),
           ],
         ),
       ),
