@@ -4,15 +4,21 @@ import 'package:bmi_calcularor_zoey/models/bmi_history.dart';
 import 'package:intl/intl.dart';
 
 class HistoryList extends StatelessWidget {
-  final List<HistoryInstance> history;
-  HistoryList(this.history);
+  const HistoryList({
+    Key? key,
+    required List<HistoryInstance> userHistory,
+    required double bmiResult,
+  })  : _userHistory = userHistory,
+        _bmiResult = bmiResult,
+        super(key: key);
 
-  double _bmiResult = 0;
+  final List<HistoryInstance> _userHistory;
+  final double _bmiResult;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: history.map((his) {
+        children: _userHistory.map((his) {
       return Card(
         margin: EdgeInsets.only(top: 30.0),
         child: Container(
@@ -23,9 +29,9 @@ class HistoryList extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text("$_bmiResult"),
+                Text(_bmiResult.toStringAsFixed(2)),
                 SizedBox(height: 10.0),
-                Text(DateFormat("dd/MM/yyyy HH:m").format(his.date))
+                Text(DateFormat("dd/MM/yyyy HH:mm").format(his.date))
               ],
             ),
           ]),

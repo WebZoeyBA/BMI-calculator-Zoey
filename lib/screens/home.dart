@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:bmi_calcularor_zoey/constants/app_constants.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:bmi_calcularor_zoey/widgets/Custom_gauge.dart';
-import 'package:bmi_calcularor_zoey/widgets/height_container.dart';
-import 'package:bmi_calcularor_zoey/widgets/weight_container';
+import 'package:bmi_calcularor_zoey/widgets/textfield_containers/height_container.dart';
+import 'package:bmi_calcularor_zoey/widgets/textfield_containers/weight_container.dart';
+import 'package:bmi_calcularor_zoey/widgets/textfield_containers/name_container.dart';
 import 'package:bmi_calcularor_zoey/models/bmi_history.dart';
 import 'package:intl/intl.dart';
-import 'package:bmi_calcularor_zoey/widgets/history_list.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class MyHomeScreen extends StatefulWidget {
   @override
@@ -40,15 +39,15 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
       appBar: AppBar(
         toolbarHeight: 80.0,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Icon(
+            NeumorphicIcon(
               Icons.calculate,
               size: 70.0,
-              color: Colors.grey[600],
+              style: NeumorphicStyle(color: Colors.white, depth: 2),
             ),
             Text(
-              "ZOEY BMI Calculator",
+              "BMI Calculator",
               style: TextStyle(
                   color: Colors.grey[600],
                   fontSize: 32,
@@ -64,34 +63,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: 70,
-              margin: EdgeInsets.symmetric(horizontal: 53.0, vertical: 20.0),
-              child: Material(
-                child: TextField(
-                  controller: _usernameController,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 42,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.grey[600],
-                  ),
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(5)),
-                    hintText: "Enter your name",
-                    hintStyle: TextStyle(
-                        color: Colors.grey.withOpacity(0.8),
-                        fontWeight: FontWeight.w300,
-                        fontSize: 42),
-                  ),
-                ),
-              ),
-            ),
+            NameContainer(usernameController: _usernameController),
             SizedBox(
               height: 20,
             ),
@@ -99,7 +71,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 HeightContainer(heightController: _heightController),
-                WeightHeightContainer(weightController: _weightController),
+                WeightContainer(weightController: _weightController)
               ],
             ),
             SizedBox(
@@ -151,9 +123,8 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
             SizedBox(
               height: 30.0,
             ),
-            IconButton(
-              iconSize: 72,
-              icon: Icon(Icons.refresh),
+            NeumorphicButton(
+              child: Icon(Icons.refresh),
               onPressed: () {
                 setState(() {
                   _bmiResult = 0;
@@ -165,7 +136,6 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 });
               },
             ),
-            HistoryList(_userHistory),
           ],
         ),
       ),
