@@ -1,3 +1,4 @@
+import 'package:bmi_calcularor_zoey/widgets/history_list.dart';
 import 'package:flutter/material.dart';
 import 'package:bmi_calcularor_zoey/widgets/Custom_gauge.dart';
 import 'package:bmi_calcularor_zoey/widgets/textfield_containers/height_container.dart';
@@ -19,7 +20,9 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
     final newIns = HistoryInstance(
         id: DateTime.now().toString(),
         username: usernameIns,
-        date: DateTime.now());
+        date: DateTime.now(),
+        bmiResult: _bmiResult);
+    print(newIns.bmiResult);
     setState(() {
       _userHistory.add(newIns);
     });
@@ -77,17 +80,12 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
             SizedBox(
               height: 40.0,
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                elevation: 20,
-                side: BorderSide(
-                  width: 2,
-                  color: Colors.transparent,
-                ),
+            NeumorphicButton(
+              style: NeumorphicStyle(
+                color: Colors.grey[200],
+                depth: 7,
               ),
               onPressed: () {
-                addNewInstance(_usernameController.text);
                 double _h = double.parse(_heightController.text);
                 double _w = double.parse(_weightController.text);
                 setState(() {
@@ -103,9 +101,10 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                     _resColor = Colors.blueAccent;
                   }
                 });
+                addNewInstance(_usernameController.text);
               },
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Text(
                   "Calculate",
                   style: TextStyle(
@@ -124,7 +123,11 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
               height: 30.0,
             ),
             NeumorphicButton(
-              child: Icon(Icons.refresh),
+              style: NeumorphicStyle(color: Colors.grey[200], depth: 5),
+              child: Icon(
+                Icons.refresh,
+                color: Colors.grey[600],
+              ),
               onPressed: () {
                 setState(() {
                   _bmiResult = 0;
@@ -136,6 +139,7 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
                 });
               },
             ),
+            HistoryList(userHistory: _userHistory)
           ],
         ),
       ),

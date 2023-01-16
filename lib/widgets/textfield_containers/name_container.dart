@@ -27,7 +27,7 @@ class NameContainer extends StatelessWidget {
             controller: _usernameController,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 42,
+              fontSize: 32,
               fontWeight: FontWeight.w300,
               color: Colors.grey[600],
             ),

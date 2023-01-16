@@ -30,7 +30,7 @@ class WeightContainer extends StatelessWidget {
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: "Height",
+              hintText: "Weight",
               hintStyle: TextStyle(
                   color: Colors.grey.withOpacity(0.8),
                   fontWeight: FontWeight.w300,

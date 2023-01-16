@@ -5,6 +5,10 @@ class HistoryInstance {
   String id;
   String username;
   DateTime date;
+  double bmiResult;
   HistoryInstance(
-      {required this.id, required this.username, required this.date});
+      {required this.id,
+      required this.username,
+      required this.date,
+      required this.bmiResult});
 }
